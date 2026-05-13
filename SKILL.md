@@ -95,7 +95,7 @@ triggers:
 
 | 作品 | 子 skill |
 |---|---|
-| 《一梦浮笙》 | `fanfic-yimeng-fusheng` |
+| *（你的作品）* | *（你的子 skill）* |
 
 ---
 
