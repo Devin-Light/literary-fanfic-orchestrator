@@ -8,6 +8,8 @@ def resolve(filepath, visited=None):
     if visited is None:
         visited = set()
     abspath = os.path.abspath(filepath)
+    if not os.path.isfile(abspath):
+        raise FileNotFoundError(f"文件不存在: {abspath}")
     if abspath in visited:
         raise RecursionError(f"循环引用: {abspath}")
     visited.add(abspath)
@@ -16,7 +18,10 @@ def resolve(filepath, visited=None):
         for line in f:
             m = INCLUDE_RE.match(line.strip())
             if m:
-                included = os.path.join(base, m.group(1))
+                path = m.group(1).strip()
+                if not path:
+                    raise ValueError(f"{abspath}: include 路径不能为空")
+                included = os.path.join(base, path)
                 yield from resolve(included, visited.copy())
             else:
                 yield line
