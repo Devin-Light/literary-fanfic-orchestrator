@@ -160,37 +160,9 @@ mkdir -p ~/.claude/skills/fanfic-你的作品名
 └── 灵感随笔/                         ← 碎片想法和废案
 ```
 
-**三层 include 体系**：主文件 `include` 卷文件，卷文件 `include` 章文件，使用 `<!-- #include "相对路径" -->` 约定。构建时用 `build.py` 递归解析所有引用，输出完整手稿。
+**三层 include 体系**：主文件 `include` 卷文件，卷文件 `include` 章文件，使用 `<!-- #include "相对路径" -->` 约定。
 
-```python
-#!/usr/bin/env python3
-"""递归解析 <!-- #include "路径" --> 指令，生成完整手稿。"""
-import re, sys, os
-
-INCLUDE_RE = re.compile(r'<!--\s*#include\s*"([^"]+)"\s*-->')
-
-def resolve(filepath, visited=None):
-    if visited is None:
-        visited = set()
-    abspath = os.path.abspath(filepath)
-    if abspath in visited:
-        raise RecursionError(f"循环引用: {abspath}")
-    visited.add(abspath)
-    base = os.path.dirname(abspath)
-    with open(abspath, 'r', encoding='utf-8') as f:
-        for line in f:
-            m = INCLUDE_RE.match(line.strip())
-            if m:
-                included = os.path.join(base, m.group(1))
-                yield from resolve(included, visited.copy())
-            else:
-                yield line
-
-if __name__ == '__main__':
-    root = sys.argv[1] if len(sys.argv) > 1 else '作品名.md'
-    for line in resolve(root):
-        sys.stdout.write(line)
-```
+仓库提供 `build.py` 脚本，递归解析所有引用后输出完整手稿。
 
 日常写作只编辑单章文件，`python3 build.py` 随时查看完整手稿。Git 对单章文件的 diff 远比一个巨大的全文文件清晰。
 
