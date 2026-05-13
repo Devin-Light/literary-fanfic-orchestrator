@@ -77,11 +77,11 @@ literary-fanfic-orchestrator  (元 skill · 通用层)
 
 | 阶段 | 所需 skill | 来源 |
 |---|---|---|
-| 细读 | `deep-reading-analyst` | `npx skills-installer add @hacket/ClaudeCodeTips/deep-reading-analyst` |
+| 细读 | `deep-reading-analyst` | `npx skills-installer add @hacket/ClaudeCodeTips/deep-reading-analyst --client shared`（安装后需创建软链接到 `~/.claude/skills/`） |
 | 人物 | `character-forge`, `voice-alchemy` | `npx @arcanea/skills` |
 | 场景 | `scene-craft`, `dialogue-mastery` | `npx @arcanea/skills` |
 | 结构 | `story-weave`, `world-build` | `npx @arcanea/skills` |
-| 语言 | `beautiful-prose` | 见 [sickn33/antigravity-awesome-skills](https://github.com/sickn33/antigravity-awesome-skills) |
+| 语言 | `beautiful-prose` | 从 [sickn33/antigravity-awesome-skills](https://github.com/sickn33/antigravity-awesome-skills) 下载 SKILL.md 至 `~/.claude/skills/beautiful-prose/` |
 | 流程 | `creative-flow`, `bestiary-nav`, `centaur-mode` | `npx @arcanea/skills` |
 
 ## 快速开始
@@ -89,9 +89,18 @@ literary-fanfic-orchestrator  (元 skill · 通用层)
 ### 1. 安装依赖 skill
 
 ```bash
+# 核心 craft skill（7 个写作 skill + 相关辅助 skill）
 npx @arcanea/skills
+
+# 深度阅读分析
 npx skills-installer add @hacket/ClaudeCodeTips/deep-reading-analyst --client shared
-# beautiful-prose 需手动安装到 ~/.claude/skills/beautiful-prose/
+# 以上命令安装到 ~/.config/agents/skills/，需手动创建软链接：
+ln -s ~/.config/agents/skills/deep-reading-analyst ~/.claude/skills/deep-reading-analyst
+
+# 语言抛光（需手动安装）
+mkdir -p ~/.claude/skills/beautiful-prose
+curl -o ~/.claude/skills/beautiful-prose/SKILL.md \
+  https://raw.githubusercontent.com/sickn33/antigravity-awesome-skills/main/plugins/antigravity-awesome-skills-claude/skills/beautiful-prose/SKILL.md
 ```
 
 ### 2. 安装本元 skill
