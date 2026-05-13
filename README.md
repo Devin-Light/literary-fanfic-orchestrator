@@ -122,6 +122,75 @@ mkdir -p ~/.claude/skills/fanfic-你的作品名
 
 直接用自然语言描述你当前的需求——元 skill 会根据路由表自动调用对应的 craft skill。约束条件在全局生效，不需要每次重复。
 
+### 推荐：作品项目目录结构
+
+在实际创作中，推荐以下目录结构来管理你的作品（以《一梦浮笙》为例）：
+
+```
+你的作品目录/
+├── README.md                         ← 项目说明
+│
+├── 正文/                             ← 手稿区
+│   ├── build.py                      ← 构建脚本（见下方）
+│   ├── 一梦浮笙.md                   ← 主文件（入口，include 各卷）
+│   │
+│   ├── 卷一·止水/
+│   │   ├── 卷一·止水.md               ← 卷文件（include 各章）
+│   │   ├── 第01章 轻雨何故落.md
+│   │   ├── 第02章 在火的远处.md
+│   │   └── 第03章 风起青萍末.md
+│   ├── 卷二·无尘/
+│   │   └── 卷二·无尘.md
+│   ├── 卷三·明镜/
+│   │   └── 卷三·明镜.md
+│   └── 卷四·太虚/
+│       └── 卷四·太虚.md
+│
+├── 大纲/                             ← 结构规划
+│   ├── 大纲.md                       ← 整体大纲
+│   └── 角色大纲/                     ← 角色设定（每角色一文件）
+│       └── 瑶笙.md
+│
+├── 设定/                             ← 世界观、规则、背景参考
+├── 原作资料/                         ← 原著相关的阅读笔记
+├── 讨论记录/                         ← AI 对话存档
+└── 灵感随笔/                         ← 碎片想法和废案
+```
+
+**三层 include 体系**：主文件 `include` 卷文件，卷文件 `include` 章文件，使用 `<!-- #include "相对路径" -->` 约定。构建时用 `build.py` 递归解析所有引用，输出完整手稿。
+
+```python
+#!/usr/bin/env python3
+"""递归解析 <!-- #include "路径" --> 指令，生成完整手稿。"""
+import re, sys, os
+
+INCLUDE_RE = re.compile(r'<!--\s*#include\s*"([^"]+)"\s*-->')
+
+def resolve(filepath, visited=None):
+    if visited is None:
+        visited = set()
+    abspath = os.path.abspath(filepath)
+    if abspath in visited:
+        raise RecursionError(f"循环引用: {abspath}")
+    visited.add(abspath)
+    base = os.path.dirname(abspath)
+    with open(abspath, 'r', encoding='utf-8') as f:
+        for line in f:
+            m = INCLUDE_RE.match(line.strip())
+            if m:
+                included = os.path.join(base, m.group(1))
+                yield from resolve(included, visited.copy())
+            else:
+                yield line
+
+if __name__ == '__main__':
+    root = sys.argv[1] if len(sys.argv) > 1 else '一梦浮笙.md'
+    for line in resolve(root):
+        sys.stdout.write(line)
+```
+
+日常写作只编辑单章文件，`python3 build.py` 随时查看完整手稿。Git 对单章文件的 diff 远比一个巨大的全文文件清晰。
+
 ## 为什么用这个？
 
 - **避免每次遍历全部 skill** —— 你装了 30 个 skill，但不是每个都和"写对话"有关。元 skill 帮你路由
