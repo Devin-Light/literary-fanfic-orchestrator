@@ -86,6 +86,7 @@ triggers:
 | "声音不对" / "叙事语气不一致" | `voice-alchemy` |
 | "卡住了" / "写不下去" | `bestiary-nav` → `creative-flow` |
 | "帮我改这一段" | `deep-reading-analyst` → `beautiful-prose` |
+| "构建手稿" / "生成全文" | 执行 `python3 build.py .`（目录遍历模式）或 `python3 build.py 作品名.md`（include 模式） |
 
 ---
 
@@ -95,7 +96,7 @@ triggers:
 
 | 作品 | 子 skill |
 |---|---|
-| *（你的作品）* | *（你的子 skill）* |
+| 《一梦浮笙》 | `fanfic-yimeng-fusheng` |
 
 ---
 
