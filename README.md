@@ -97,11 +97,12 @@ npx skills-installer add @hacket/ClaudeCodeTips/deep-reading-analyst --client sh
 ### 2. 安装本元 skill
 
 ```bash
-git clone https://github.com/Devin-Light/literary-fanfic-orchestrator.git /tmp/literary-fanfic-orchestrator
-cp /tmp/literary-fanfic-orchestrator/SKILL.md ~/.claude/skills/literary-fanfic-orchestrator/SKILL.md
+git clone https://github.com/Devin-Light/literary-fanfic-orchestrator.git
+mkdir -p ~/.claude/skills/literary-fanfic-orchestrator
+cp literary-fanfic-orchestrator/SKILL.md ~/.claude/skills/literary-fanfic-orchestrator/
 ```
 
-重启 Claude Code 后，元 skill 自动激活。`build.py` 可复制到你的项目目录中使用。
+重启 Claude Code 后，元 skill 自动激活。仓库中 `build.py` 可复制到你的项目目录中使用。
 
 ### 3. 创建你的第一个作品子 skill
 
