@@ -11,11 +11,34 @@
 
 import re, sys, os
 
-_CHINESE_NUMS = str.maketrans('一二三四五六七八九十', '1234567890')
+_CN_DIGITS = {'一':1,'二':2,'三':3,'四':4,'五':5,'六':6,'七':7,'八':8,'九':9,
+               '十':10,'百':100,'千':1000,'万':10000}
+
+def _cn_to_int(s):
+    """将中文数字字符串转为整数，支持 一 到 九十九。"""
+    n = 0
+    if not s:
+        return 0
+    if s[0] == '十':
+        n = 10 + _CN_DIGITS.get(s[1], 0) if len(s) > 1 else 10
+    elif len(s) >= 2 and s[1] == '十':
+        n = _CN_DIGITS[s[0]] * 10 + _CN_DIGITS.get(s[2], 0) if len(s) > 2 else _CN_DIGITS[s[0]] * 10
+    else:
+        n = _CN_DIGITS.get(s, 0)
+    return n
+
+_CN_NUM_RE = re.compile(r'[一二三四五六七八九十百千万]+')
 
 def _sort_key(name):
-    """提取文件名中的中文数字并转换为阿拉伯数字，用于正确排序。"""
-    return name.translate(_CHINESE_NUMS)
+    """用文件名中的中文数字转换为零填充整数串作为排序键。"""
+    result = []
+    last = 0
+    for m in _CN_NUM_RE.finditer(name):
+        result.append(name[last:m.start()])
+        result.append(f'{_cn_to_int(m.group()):04d}')
+        last = m.end()
+    result.append(name[last:])
+    return ''.join(result)
 
 INCLUDE_RE = re.compile(r'<!--\s*#include\s*"([^"]+)"\s*-->')
 
