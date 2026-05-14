@@ -67,7 +67,7 @@ literary-fanfic-orchestrator  (元 skill · 通用层)
 
 6. **反刻意原则** —— 不要鬼鬼祟祟地"不经意"。大大方方写，不需要时不硬塞
 6b. **明目张胆原则** —— 伏笔藏于明处。只要伏笔在当前的局部信息中有合理解释，读者就会自己帮我们把它归档为"已处理信息"
-7. **推演者原则** —— 作者是观测者/推演者，不是上帝。输入初始条件，让角色自己"活过来"完成剧情
+7. **推演者原则** —— 作者是观测者/推演者，不是上帝。输入初始条件，让角色自己"活过来"完成剧情。推演不仅关乎行为逻辑，还关乎感知边界——每个角色只能基于自己能感知到的信息做出反应
 8. **大纲即约束集合** —— 大纲不是铁轨，是初始约束+边界条件+目标的总和。通过推演去拟合大纲，拟合不上就改大纲
 9. **少即是多，元叙事应慎用** —— 环境已经变了，就不需要旁白说"穿越完成了"。相信读者
 10. **人称亦是叙事** —— 同一角色在不同叙述视角下应有不同的称呼（正式称呼、关系称呼、身份判断），这是叙事的一部分，不是统一性问题
@@ -113,6 +113,14 @@ cp literary-fanfic-orchestrator/SKILL.md ~/.claude/skills/literary-fanfic-orches
 ```
 
 重启 Claude Code 后，元 skill 自动激活。仓库中 `build.py` 可复制到你的项目目录中使用。
+
+### 或者：让 AI 帮你安装
+
+如果你不想手动操作，复制以下命令发给你的 Claude Code，它会自动完成全部安装：
+
+```
+请帮我安装 literary-fanfic-orchestrator 这个 Claude Code skill。仓库地址：https://github.com/Devin-Light/literary-fanfic-orchestrator 。按照仓库 README 中的依赖列表和安装步骤，把所有依赖 skill 和元 skill 本身都安装到 ~/.claude/skills/ 目录下。安装完成后验证所有 skill 文件是否就位。
+```
 
 ### 3. 创建你的第一个作品子 skill
 
@@ -197,6 +205,9 @@ A: 不是。同人只是它最擅长的领域。你完全可以用它来写原�
 
 **Q: 只能在 Claude Code 中使用吗？**
 A: 目前 v1.0 版本是为 Claude Code 的技能系统量身定制的。但整个架构是平台无关的，未来会逐步迁移到其他大模型平台。
+
+**Q: 兼容 DeepSeek-TUI 和 OpenClaw 吗？**
+A: 理论上兼容。本 skill 的核心是 Markdown 文件 + Python 构建脚本，不依赖 Claude Code 特有的私有 API。任何支持自定义 skill/提示词注入的 AI 编程工具都可以使用。DeepSeek-TUI 和 OpenClaw 若支持类似的 skill 加载机制，直接复制 SKILL.md 和依赖 skill 文件即可。
 
 ## 许可
 
