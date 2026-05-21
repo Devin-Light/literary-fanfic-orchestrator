@@ -2,7 +2,7 @@
 
 > 一个用于严肃文学向同人创作的 Claude Code 元技能。不代你写，而是帮你以正确的方式调用正确的技能——并在此过程中逐步建立你自己的创作方法论。
 >
-> **版本**：2.0 (pre)
+> **版本**：2.1-preview
 
 ## 这是什么？
 
@@ -88,6 +88,7 @@ literary-fanfic-orchestrator  (元 skill · 通用层)
 | 结构 | `story-weave`, `world-build` | `npx @arcanea/skills` |
 | 语言 | `beautiful-prose` | 从 [sickn33/antigravity-awesome-skills](https://github.com/sickn33/antigravity-awesome-skills) 下载 SKILL.md 至 `~/.claude/skills/beautiful-prose/` |
 | 流程 | `creative-flow`, `bestiary-nav`, `centaur-mode` | `npx @arcanea/skills` |
+| 推演 | `ensemble-deduction` | [Devin-Light/ensemble-deduction](https://github.com/Devin-Light/ensemble-deduction) — 复制 SKILL.md 至 `~/.claude/skills/ensemble-deduction/` |
 
 ## 快速开始
 
