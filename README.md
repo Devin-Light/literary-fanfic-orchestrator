@@ -88,7 +88,7 @@ literary-fanfic-orchestrator  (元 skill · 通用层)
 | 结构 | `story-weave`, `world-build` | `npx @arcanea/skills` |
 | 语言 | `beautiful-prose` | 从 [sickn33/antigravity-awesome-skills](https://github.com/sickn33/antigravity-awesome-skills) 下载 SKILL.md 至 `~/.claude/skills/beautiful-prose/` |
 | 流程 | `creative-flow`, `bestiary-nav`, `centaur-mode` | `npx @arcanea/skills` |
-| 推演 | `ensemble-deduction` | [Devin-Light/ensemble-deduction](https://github.com/Devin-Light/ensemble-deduction) — 复制 SKILL.md 至 `~/.claude/skills/ensemble-deduction/` |
+| 推演 | `ensemble-deduction` | [Devin-Light/ensemble-deduction](https://github.com/Devin-Light/ensemble-deduction) — 详见该仓库 README |
 
 ## 快速开始
 
