@@ -217,7 +217,7 @@ python3 build.py .
 A: 不是。同人只是它最擅长的领域。你完全可以用它来写原创小说，只需要在作品子 skill 中去掉"原著"相关的部分即可。
 
 **Q: 只能在 Claude Code 中使用吗？**
-A: 本 skill 的核心是 Markdown 文件 + Python 构建脚本，不依赖任何平台特有的私有 API。当前版本针对 Claude Code 的 skill 系统做了适配（触发词、目录约定），但理论上任何支持自定义提示词注入的 AI 编程工具均可使用。已确认兼容 DeepSeek-TUI 和 OpenClaw。
+A: 本 skill 的核心是 Markdown 文件 + Python 构建脚本，不依赖任何平台特有的私有 API。当前版本针对 Claude Code 的 skill 系统做了适配（触发词、目录约定），但理论上任何支持自定义提示词注入的 AI 编程工具均可使用。已确认兼容 Hermes、HanaAgent、CodeWhale（原 DeepSeek-TUI）和 OpenClaw。
 
 ## 许可
 
